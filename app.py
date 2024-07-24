@@ -1,11 +1,56 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
+from typing import List, Tuple
+import fitz  # PyMuPDF
+from sentence_transformers import SentenceTransformer, util
+import numpy as np
+import faiss
 
-"""
-For more information on `huggingface_hub` Inference API support, please check the docs: https://huggingface.co/docs/huggingface_hub/v0.22.2/en/guides/inference
-"""
+
 client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
+class MyApp:
+    def __init__(self) -> None:
+        self.documents = []
+        self.embeddings = None
+        self.index = None
+        self.load_pdf("Education_Tutor_for_engineering_students.pdf")
+        self.build_vector_db()
+
+    def load_pdf(self, file_path: str) -> None:
+        """Extracts text from a PDF file and stores it in the app's documents."""
+        doc = fitz.open(file_path)
+        self.documents = []
+        for page_num in range(len(doc)):
+            page = doc[page_num]
+            text = page.get_text()
+            self.documents.append({"page": page_num + 1, "content": text})
+        print("PDF processed successfully!")
+
+    def build_vector_db(self) -> None:
+        """Builds a vector database using the content of the PDF."""
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        # Generate embeddings for all document contents
+        self.embeddings = model.encode([doc["content"] for doc in self.documents])
+        # Create a FAISS index
+        self.index = faiss.IndexFlatL2(self.embeddings.shape[1])
+        # Add the embeddings to the index
+        self.index.add(np.array(self.embeddings))
+        print("Vector database built successfully!")
+
+    def search_documents(self, query: str, k: int = 3) -> List[str]:
+        """Searches for relevant documents using vector similarity."""
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        # Generate an embedding for the query
+        query_embedding = model.encode([query])
+        # Perform a search in the FAISS index
+        D, I = self.index.search(np.array(query_embedding), k)
+        # Retrieve the top-k documents
+        results = [self.documents[i]["content"] for i in I[0]]
+        return results if results else ["No relevant documents found."]
+
+app = MyApp()
+   
 
 def respond(
     message,
@@ -15,7 +60,7 @@ def respond(
     temperature,
     top_p,
 ):
-    system_message = "You are a good listener. You advise relaxation exercises, suggest avoiding negative thoughts, and guide through steps to manage stress. Discuss what's on your mind, or ask me for a quick relaxation exercise."
+    system_message = "You are a educational tutor for engineering students. You support learning journey in engineering, helping with complex concepts, exam preparation tips or guide through steps to make project.Discuss what's on your mind and ask me for a quick guidance in studies."
     messages = [{"role": "system", "content": system_message}]
 
     for val in history:
@@ -46,7 +91,7 @@ For information on how to customize the ChatInterface, peruse the gradio docs: h
 demo = gr.ChatInterface(
     respond,
     additional_inputs=[
-        gr.Textbox(value = "You are a good listener. You advise relaxation exercises, suggest avoiding negative thoughts, and guide through steps to manage stress. Discuss what's on your mind, or ask me for a quick relaxation exercise.", label="System message"),
+        gr.Textbox(value = "You are a educational tutor for engineering students. You support learning journey in engineering, helping with complex concepts, exam preparation tips or guide through steps to make project.Discuss what's on your mind and ask me for a quick guidance in studies."),
         gr.Slider(minimum=1, maximum=2048, value=512, step=1, label="Max new tokens"),
         gr.Slider(minimum=0.1, maximum=4.0, value=0.7, step=0.1, label="Temperature"),
         gr.Slider(
@@ -59,11 +104,27 @@ demo = gr.ChatInterface(
     ],
 
     examples = [ 
-        ["I feel overwhelmed with work."],
-        ["Can you guide me through a quick meditation?"],
-        ["How do I stop worrying about things I can't control?"]
+        ["I feel struggled with engineering concepts"],
+        ["Can you guide me through a quick steps to make a python project"],
+        ["can you describe basic components of electrical circuits and their functions"],
+        ["What are the principles of mechanics"],
+        ["Which programming language is used by most of the companies and how can I learn it?"],
+        ["What are different queries that are commonly used in SQL?"],
+        ["How can I do surveying and mapping in civil engineering?"],
+        ["How many research papers are published on Artificial Intelligence?"],
+        ["How can I crack a entry-level exam of JEE?"],
+        ["Can you please give the roadmap of C++ for beginner who don't know anything about coding"],
+        ["How can I build an application using RAG for LLM chatbot?"],
+        ["Display step by step guide to install active directory on windows server?"],
+        ["Define DHCP, DNS, TCP/IP"],
+        ["What are the different topics and from where I have to study for passing Comp TIA A+ exam"],
+        ["Disply all the information about Loops in all programming languages"],
+        ["what I need to configure and test VPN on the windows server?"],
+        ["Display all the information about the basics of Python Language"],
+        ["Display different certificates do I need to get a entry-level job in IT with no experience"],
+        ["How can I handle my coursework with other commitments ?"]
     ],
-    title = 'Calm Mate 🕊️'
+    title = '📝🖋️Educational Tutor for Engineering Students📝🖋️'
 )
 
 

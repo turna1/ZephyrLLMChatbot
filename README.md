@@ -1,41 +1,53 @@
-# ZephyrLLMChatbot
-A guideline to build no-cost LLM chatbot 
+# EducationTutorForEngineeringStudents-LLMChatbot
 
-This README provides a structured and detailed guide to help users through the process of creating and deploying a customized LLM chatbot using Hugging Face Spaces and Gradio, highlighting key steps and customization options, complete with useful links for easy navigation.
+This README provides a structured and detailed guide to help users create and deploy a customized LLM chatbot for engineering students using Hugging Face Spaces and Gradio. Follow the steps below to build and deploy your chatbot quickly and for free.
+
+## Build and Deploy Your Custom Engineering Tutor LLM App in 5 Minutes for Free.
+
+### Introduction
+Want to create a chatbot tailored to assist engineering students? Whether you need a tutor to explain complex concepts, provide study resources, or solve technical problems, this guide will walk you through the simple steps to build and deploy your own LLM-based chatbot using Hugging Face Spaces and Gradio—all in just five minutes.
+
+### Prerequisites
+Before you begin, ensure you have the following:
+
+- **Hugging Face Account:** Required to access the platform where you will build and host your chatbot. [Sign up here](https://huggingface.co/join).
+
+### Setup and Deployment
+
+#### Choosing Your Chatbot’s Identity
+Define the specialization of your chatbot. For this project, it will be an educational tutor for engineering students, guiding interactions and capabilities accordingly.
+
+#### Logging into Hugging Face
+Log into your Hugging Face account to access the necessary tools for deploying your chatbot. If you don’t have an account, you can create one quickly.
+
+#### Navigating to Hugging Face Spaces
+Hugging Face Spaces allows users to create and manage applications easily. Go to [Spaces](https://huggingface.co/spaces) to get started.
+
+#### Creating Your Space
+Create a new space by clicking on 'Create New Space'. Name your Space to reflect the chatbot's role, such as `EngineeringTutor`, for easy identification.
+
+### Configuring Your Chatbot
+
+#### Selecting the Framework and Model
+Choose `Gradio` for its user-friendly interface and select a suitable model, like `Zephyr 7B`, which is versatile across various tasks.
+
+#### Customization
+Personalize the chatbot by tailoring system messages and interaction styles to fit the selected role. This ensures your chatbot interacts appropriately with users.
+
+### Deployment
+Deploy your chatbot by clicking the create button. Deployment usually takes a couple of minutes. Once done, your chatbot will be live and ready for interaction.
+
+### Customization Example
+To make your chatbot unique, consider extensive personalization. For an `Engineering Tutor` role:
+
+- Adjust system messages to include technical explanations and resource suggestions.
+- Program the chatbot to provide study materials, solve engineering problems, and offer exam tips.
+
+Experiment with different roles and instructions to unlock your chatbot's full potential. Share your creations and experiences to inspire others.
 
 
-# Build and Deploy Your Custom LLM App in 5 Minutes for Free
+If you wish to contribute, please fork this repository.
 
-## Introduction
-Have you ever wished to craft a chatbot tailored to your needs? Whether it's a culinary wizard to guide you through complex recipes or an artistic mentor to discuss the nuances of painting techniques, this comprehensive guide is your gateway. We'll walk you through the simple steps to build and deploy your own LLM-based chatbot using [Hugging Face Spaces](https://huggingface.co/spaces) and Gradio—all in just five minutes, and absolutely free of charge!
+For any question reach me out @ ja4374839@alphacollege.me
 
-## Prerequisites
-Before you  start creating your chatbot, make sure you have the following:
-- **A Hugging Face Account**: Essential for accessing the platform where you'll build and host your chatbot. [Sign up here](https://huggingface.co/join).
-
-## Setup and Deployment
-1. **Choosing Your Chatbot’s Identity**: Decide what your chatbot will specialize in. This could be anything from a chef, painter, or even a relaxing buddy to help you unwind. The role you choose will define the interactions and capabilities of your chatbot.
-
-2. **Logging into Hugging Face**:  Here, you'll need an account to access the tools required for deploying your chatbot. If you don't have an account, signing up is straightforward and quick.
-
-3. **Navigating to Hugging Face Spaces**: Spaces are where the magic happens. This section of Hugging Face allows users to create and manage their applications seamlessly. Navigate to [Spaces](https://huggingface.co/spaces) to get started.
-
-4. **Creating Your Space**: Initiate a new space by clicking on 'Create New Space'. It’s important that the name of your Space reflects the chatbot's role, as it helps in identifying the application’s purpose at a glance.
-
-5. **Configuring Your Chatbot**:
-   - **Selecting the Framework and Model**: Choose 'Gradio' as the framework for its user-friendly interface capabilities, and select a suitable model, such as 'Zephyr 7B', known for its versatility across various tasks.
-   - **Customization**: Here’s where you personalize the chatbot. Depending on the selected role, you might want to tailor system messages and interaction style. This customization will enable your chatbot to interact appropriately according to its role.
-
-6. **Deployment**: Once setup is complete, deploy your chatbot by simply clicking the create button. Deployment usually takes a couple of minutes. After this, your chatbot will be up and running and ready to interact.
-
-## Customization Example
-To make your chatbot truly unique, consider personalizing it extensively. For instance, if you choose a 'Relaxing Buddy' role:
-- Modify the system messages to include comforting phrases and stress-relief tips.
-- Program the chatbot to suggest relaxation exercises, guide through meditation sessions, or simply offer soothing conversations.
-
- Explore different roles and tweak the system instructions to discover the full potential of your chatbot. Don’t forget to share your creations and experiences, as your insights could inspire others in their chatbot development.
-
- If you wish to contribute: Please fork this repo. 
-
- For any question reach me out @ turna.fardousi@gmail.com
-
+By following this guide, you can create a functional and customized engineering tutor chatbot to assist students in their studies. Enjoy building and learning!

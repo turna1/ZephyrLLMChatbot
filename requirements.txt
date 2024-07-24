@@ -1,1 +1,5 @@
-huggingface_hub==0.22.2
+gradio
+huggingface_hub
+PyMuPDF
+sentence-transformers
+faiss-cpu
